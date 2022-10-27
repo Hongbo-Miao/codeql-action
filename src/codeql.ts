@@ -2,6 +2,7 @@ import * as fs from "fs";
 import { OutgoingHttpHeaders } from "http";
 import * as path from "path";
 
+import * as core from "@actions/core";
 import * as toolrunner from "@actions/exec/lib/toolrunner";
 import * as toolcache from "@actions/tool-cache";
 import { default as deepEqual } from "fast-deep-equal";
@@ -1254,6 +1255,9 @@ async function runTool(cmd: string, args: string[] = []) {
       stderr: (data: Buffer) => {
         const toRead = Math.min(maxErrorSize - error.length, data.length);
         error += data.toString("utf8", 0, toRead);
+        core.warning(
+          `read from stderr, added ${data.toString("utf8", 0, toRead)}`
+        );
       },
     },
     ignoreReturnCode: true,

@@ -400,6 +400,7 @@ async function runWrapper() {
     await runPromise;
   } catch (error) {
     core.setFailed(`analyze action failed: ${error}`);
+  }
 }
 
 void runWrapper();
