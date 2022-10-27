@@ -397,13 +397,9 @@ export const runPromise = run();
 
 async function runWrapper() {
   try {
-    // Wait to see if CLI process can finish exiting first here.
-    await new Promise((f) => setTimeout(f, 3000));
     await runPromise;
   } catch (error) {
     core.setFailed(`analyze action failed: ${error}`);
-    console.log(error);
-  }
 }
 
 void runWrapper();
