@@ -1251,6 +1251,7 @@ async function runTool(cmd: string, args: string[] = []) {
     listeners: {
       stdout: (data: Buffer) => {
         output += data.toString();
+        core.warning(`read from stdout, added ${data.toString()}`);
       },
       stderr: (data: Buffer) => {
         const toRead = Math.min(maxErrorSize - error.length, data.length);
