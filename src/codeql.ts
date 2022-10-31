@@ -1250,15 +1250,12 @@ async function runTool(cmd: string, args: string[] = []) {
   const exitCode = await new toolrunner.ToolRunner(cmd, args, {
     silent: true,
     listeners: {
-      stdout: (data: Buffer) => {
-        const next = data.toString("utf8");
-        output += next;
-        core.warning(`read from stdout, added ${next}`);
+      stdline: (data: string) => {
+        output += data;
+        core.warning(`read from stdout, added ${data}`);
       },
-      stderr: (data: Buffer) => {
-        const toRead = Math.min(maxErrorSize - error.length, data.length);
-        const next = data.toString("utf8", 0, toRead);
-        const nextWithoutNewline = next.replace(/\r?\n/, " ");
+      errline: (data: string) => {
+        const nextWithoutNewline = data.replace(/\r?\n/, " ");
         error += nextWithoutNewline;
         core.warning(`read from stderr, added ${nextWithoutNewline}`);
       },
