@@ -1248,7 +1248,7 @@ async function runTool(cmd: string, args: string[] = []) {
   let output = "";
   let error = "";
   const exitCode = await new toolrunner.ToolRunner(cmd, args, {
-    // silent: true,
+    silent: true,
     listeners: {
       stdout: (data: Buffer) => {
         const next = data.toString("utf8");
@@ -1261,6 +1261,9 @@ async function runTool(cmd: string, args: string[] = []) {
         const nextWithoutNewline = next.replace(/\r?\n/, " ");
         error += nextWithoutNewline;
         core.warning(`read from stderr, added ${nextWithoutNewline}`);
+      },
+      debug: (data: string) => {
+        core.warning(`read from debug: ${data}`);
       },
     },
     ignoreReturnCode: true,
