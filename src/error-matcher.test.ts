@@ -20,10 +20,10 @@ test("noSourceCodeFound matches against example javascript output", async (t) =>
   );
 });
 
-test("queryMetadataError matches against example log output", async (t) => {
+test("fatalError matches against example log output", async (t) => {
   t.assert(
     testErrorMatcher(
-      "queryMetadataError",
+      "fatalError",
       "A fatal error occurred: Could not process query metadata for test-query.ql"
     )
   );
