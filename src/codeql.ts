@@ -2,7 +2,6 @@ import * as fs from "fs";
 import { OutgoingHttpHeaders } from "http";
 import * as path from "path";
 
-import * as core from "@actions/core";
 import * as toolrunner from "@actions/exec/lib/toolrunner";
 import * as toolcache from "@actions/tool-cache";
 import { default as deepEqual } from "fast-deep-equal";
@@ -1242,7 +1241,7 @@ export function getExtraOptions(
  * (2) It avoids us hitting the limit of how much data we can send in our
  *     status reports on GitHub.com.
  */
-const maxErrorSize = 20_000;
+// const maxErrorSize = 20_000;
 
 async function runTool(cmd: string, args: string[] = []) {
   let output = "";
@@ -1252,15 +1251,11 @@ async function runTool(cmd: string, args: string[] = []) {
     listeners: {
       stdline: (data: string) => {
         output += data;
-        core.warning(`read from stdout, added ${data}`);
       },
       errline: (data: string) => {
         const nextWithoutNewline = data.replace(/\r?\n/, " ");
         error += nextWithoutNewline;
-        core.warning(`read from stderr, added ${nextWithoutNewline}`);
-      },
-      debug: (data: string) => {
-        core.warning(`read from debug: ${data}`);
+        // core.warning(`read from stderr, added ${nextWithoutNewline}`);
       },
     },
     ignoreReturnCode: true,
