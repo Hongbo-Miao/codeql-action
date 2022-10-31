@@ -1248,7 +1248,7 @@ async function runTool(cmd: string, args: string[] = []) {
   let output = "";
   let error = "";
   const exitCode = await new toolrunner.ToolRunner(cmd, args, {
-    silent: true,
+    // silent: true,
     listeners: {
       stdout: (data: Buffer) => {
         const next = data.toString("utf8");

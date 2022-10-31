@@ -18,6 +18,13 @@ export const namedMatchersForTesting: { [key: string]: ErrorMatcher } = {
       "No code found during the build. Please see:\n" +
       "https://docs.github.com/en/github/finding-security-vulnerabilities-and-errors-in-your-code/troubleshooting-code-scanning#no-code-found-during-the-build",
   },
+  queryMetadataError: {
+    outputRegex: new RegExp("Could not process query metadata"),
+    // TODO(angelapwen): Probably too brittle?
+    message:
+      "Could not process query metadata for a query. Please see:\n" +
+      "https://codeql.github.com/docs/writing-codeql-queries/metadata-for-codeql-queries/",
+  },
 };
 
 // we collapse the matches into an array for use in execErrorCatcher
