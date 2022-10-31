@@ -2,6 +2,7 @@ import * as fs from "fs";
 import { OutgoingHttpHeaders } from "http";
 import * as path from "path";
 
+import * as core from "@actions/core";
 import * as toolrunner from "@actions/exec/lib/toolrunner";
 import * as toolcache from "@actions/tool-cache";
 import { default as deepEqual } from "fast-deep-equal";
@@ -1260,6 +1261,7 @@ async function runTool(cmd: string, args: string[] = []) {
           readStartIndex = data.length - maxErrorSize + 1;
         }
         error += data.toString("utf8", readStartIndex);
+        core.warning(data.toString("utf8", readStartIndex));
       },
     },
     ignoreReturnCode: true,
