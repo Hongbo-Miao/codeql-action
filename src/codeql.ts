@@ -1253,8 +1253,8 @@ async function runTool(cmd: string, args: string[] = []) {
         output += data;
       },
       errline: (data: string) => {
-        const nextWithoutNewline = data.replace(/\r?\n/, " ");
-        error += nextWithoutNewline;
+        // const nextWithoutNewline = data.replace(/\r?\n/, " ");
+        error += data;
         // core.warning(`read from stderr, added ${nextWithoutNewline}`);
       },
     },
